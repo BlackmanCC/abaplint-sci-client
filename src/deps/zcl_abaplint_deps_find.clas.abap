@@ -162,7 +162,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_abaplint_deps_find IMPLEMENTATION.
+CLASS ZCL_ABAPLINT_DEPS_FIND IMPLEMENTATION.
 
 
   METHOD add_subpackages.
@@ -204,9 +204,9 @@ CLASS zcl_abaplint_deps_find IMPLEMENTATION.
   METHOD constructor.
 
     ms_options = is_options.
-    IF ms_options-depth IS INITIAL.
-      ms_options-depth = 20.
-    ENDIF.
+*    IF ms_options-depth IS INITIAL.
+*      ms_options-depth = 20.
+*    ENDIF.
 
     ms_types = prepare_supported_types( ).
 

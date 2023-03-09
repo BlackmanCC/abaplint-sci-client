@@ -119,6 +119,13 @@ CLASS ZCL_ABAPLINT_BACKEND IMPLEMENTATION.
     DATA lo_deps TYPE REF TO zcl_abaplint_deps.
     DATA lt_found TYPE zif_abapgit_git_definitions=>ty_files_tt.
 
+    "Depth 0 means do not build deps
+    "Be careful, because only some checks work without dependencies
+    IF ms_config-depth = 0.
+      rv_files = |[{ rv_files }]|.
+      RETURN.
+    ENDIF.
+
     CREATE OBJECT lo_deps.
     lt_found = lo_deps->find(
       is_options     = ms_config
