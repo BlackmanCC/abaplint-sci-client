@@ -3,7 +3,7 @@ REPORT zabaplint_debug.
 TYPES: BEGIN OF ty_data,
          config TYPE string,
          deps   TYPE zif_abapgit_git_definitions=>ty_files_tt,
-         object TYPE zcl_abapgit_objects=>ty_serialization,
+         object TYPE zif_abapgit_objects=>ty_serialization,
        END OF ty_data.
 
 PARAMETERS: p_type TYPE tadir-object OBLIGATORY,
@@ -109,6 +109,8 @@ FORM find CHANGING cs_data TYPE ty_data RAISING zcx_abapgit_exception zcx_abapli
 
   cs_data-object = zcl_abapgit_objects=>serialize(
     is_item     = cs_data-object-item
-    iv_language = sy-langu ).
+    io_i18n_params = zcl_abapgit_i18n_params=>new(
+      iv_main_language_only = abap_true
+      iv_main_language      = sy-langu ) ).
 
 ENDFORM.

@@ -152,15 +152,17 @@ CLASS ZCL_ABAPLINT_BACKEND IMPLEMENTATION.
 * also take settings into account, but not super important?
 
     DATA lt_files TYPE string_table.
-    DATA ls_files_item TYPE zcl_abapgit_objects=>ty_serialization.
+    DATA ls_files_item TYPE zif_abapgit_objects=>ty_serialization.
 
     ls_files_item-item-obj_type = iv_object_type.
     ls_files_item-item-obj_name = iv_object_name.
 
     TRY.
         ls_files_item = zcl_abapgit_objects=>serialize(
-          is_item     = ls_files_item-item
-          iv_language = sy-langu ).
+          is_item        = ls_files_item-item
+          io_i18n_params = zcl_abapgit_i18n_params=>new(
+            iv_main_language_only = abap_true
+            iv_main_language      = sy-langu ) ).
       CATCH zcx_abapgit_exception.
         ASSERT 0 = 1.
     ENDTRY.
